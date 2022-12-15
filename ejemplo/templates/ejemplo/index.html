@@ -1,0 +1,15 @@
+{% extends 'ejemplo/base.html' %}
+{% block contenido %}
+    {% for familiar in lista_familiares %}
+    <ul>
+        <li>
+            <a href='/mi-familia/actualizar/{{ familiar.id }}'>Actualizar</a>
+            <a href='/mi-familia/borrar/{{ familiar.id }}'>Borrar</a>
+        </li>
+    </ul>
+{% endfor %}
+{%endblock %}
+
+{% block titulo%}
+Index Principal
+{% endblock %}
