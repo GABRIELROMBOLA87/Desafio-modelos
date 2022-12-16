@@ -1,0 +1,18 @@
+{% extends 'ejemplo/base2.html' %}
+{% block contenido %}
+    
+    <a href='/mi-mascota/altamascota/'>Nueva Mascota</a>
+    {% for Mascota in lista_mascotas %}
+    <ul>
+        <li> Nombre: {{mascota.nombre}}, Raza: {{mascota.raza}}, Edad: {{mascota.edad}}, Dueño: {{mascota.dueño}}
+            <!-- Esto agrega un link al form de actulización-->
+            <a href='/mascotas/actualizar/{{ mascotas.id }}'>Actualizar</a>
+            <a href='/mascotas/borrar/{{ mascotas.id }}'>Borrar</a>
+        </li>
+    </ul>
+{% endfor %}
+{%endblock %}
+
+{% block titulo%}
+Lista de todos mis Familiares
+{% endblock %}

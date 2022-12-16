@@ -1,11 +1,15 @@
 from django.shortcuts import render, get_object_or_404
-from ejemplo.models import Familiar 
-from ejemplo.forms import Buscar, FamiliarForm
+from ejemplo.models import Familiar, Mascotas
+from ejemplo.forms import Buscar, FamiliarForm, MascotasForm
 from django.views import View
 
 
 def principal(request):
     return render(request, "ejemplo/principal.html")
+
+
+#Familiares
+
 
 def monstrar_familiares(request):
   lista_familiares = Familiar.objects.all()
@@ -88,3 +92,43 @@ class BorrarFamiliar(View):
       familiar.delete()
       familiar = Familiar.objects.all()
       return render(request, self.template_name, {'lista_familiares': familiar})
+
+
+
+
+#Mascotas
+
+def monstrar_mascotas(request):
+  lista_mascotas = Mascotas.objects.all()
+  return render(request, "ejemplo/mascotas.html", {"lista_mascotas": lista_mascotas})
+
+
+class Altamascota(View):
+
+    form_class = MascotasForm
+    template_name = 'ejemplo/alta_mascota.html'
+    initial = {"nombre":"", "raza":"", "edad":"", "dueño":""}
+
+    def get(self, request):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form':form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            msg_exito = f"se cargo con éxito la mascota {form.cleaned_data.get('nombre')}"
+            form = self.form_class(initial=self.initial)
+            return render(request, self.template_name, {'form':form, 
+                                                        'msg_exito': msg_exito})
+        
+        return render(request, self.template_name, {"form": form})
+
+
+
+#Vehiculos
+
+
+
+
+

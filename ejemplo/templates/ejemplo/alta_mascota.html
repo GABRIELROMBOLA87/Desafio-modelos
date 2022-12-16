@@ -1,8 +1,8 @@
-{% extends 'ejemplo/base.html' %}
-{% block titulo%} Alta de nuevo Familiar {% endblock %}
+{% extends 'ejemplo/base2.html' %}
+{% block titulo%} Alta de nueva Mascota {% endblock %}
 {% block contenido %}
   
-  <form action="/mi-familia/alta" method="post">
+  <form action="/mi-mascota/altamascota" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Guardar">

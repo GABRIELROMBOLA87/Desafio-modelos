@@ -1,5 +1,8 @@
 from django.db import models
 
+
+# Familares
+
 class Familiar(models.Model):
 
     nombre = models.CharField(max_length=100)
@@ -8,6 +11,8 @@ class Familiar(models.Model):
         
     def __str__(self):
       return f"{self.nombre}, {self.numero_pasaporte}, {self.id}"
+
+# Mascotas
 
 class Mascotas(models.Model):
 
@@ -19,6 +24,9 @@ class Mascotas(models.Model):
     def __str__(self):
       return f"{self.nombre}, {self.raza}, {self.edad}, {self.dueño}"
       
+
+# Vehiculos
+       
 class Vehiculo(models.Model):
 
     modelo = models.CharField(max_length=100)

@@ -16,7 +16,7 @@ class FamiliarForm(forms.ModelForm):
 
 #Formulario para Mascotas
 
-class FamiliarForm(forms.ModelForm):
+class MascotasForm(forms.ModelForm):
   class Meta:
     model = Mascotas
     fields = ['nombre', 'raza', 'edad', 'dueño']
@@ -24,7 +24,7 @@ class FamiliarForm(forms.ModelForm):
 
 #Formulario para Autos
 
-class FamiliarForm(forms.ModelForm):
+class VehiculosForm(forms.ModelForm):
   class Meta:
     model = Vehiculo
     fields = ['marca', 'modelo', 'año']
