@@ -149,14 +149,14 @@ class ActualizarMascotas(View):
       
       return render(request, self.template_name, {"form": form})
 
- class BorrarMascota(View):
+class BorrarMascota(View):
   template_name = 'ejemplo/mascotas.html'
     
   def get(self, request, pk): 
-      familiar = get_object_or_404(Mascotas, pk=pk)
-      familiar.delete()
-      familiar = Familiar.objects.all()
-      return render(request, self.template_name, {'lista_familiares': familiar})     
+      mascotas = get_object_or_404(Mascotas, pk=pk)
+      mascotas.delete()
+      mascotas = Mascotas.objects.all()
+      return render(request, self.template_name, {'lista_mascotas': mascotas})     
 
 
 
