@@ -2,7 +2,6 @@
 {% block titulo%} Modificar un Familiar {% endblock %}
 {% block contenido %}
 
-<!-- Prestar aatención a la variable familiar.id -->
 <form action="/mi-familia/actualizar/{{ familiar.id }}" method="post"> 
     {% csrf_token %}
     {{ form.as_p }}

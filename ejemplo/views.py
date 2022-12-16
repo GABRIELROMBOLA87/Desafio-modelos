@@ -124,6 +124,40 @@ class Altamascota(View):
         
         return render(request, self.template_name, {"form": form})
 
+class ActualizarMascotas(View):
+  form_class = MascotasForm
+  template_name = 'ejemplo/actualizar_mascota.html'
+  initial = {"nombre":"", "raza":"", "edad":"", "dueño":""}
+  
+  # prestar atención ahora el method get recibe un parametro pk == primaryKey == identificador único
+  def get(self, request, pk): 
+      mascotas = get_object_or_404(Mascotas, pk=pk)
+      form = self.form_class(instance=mascotas)
+      return render(request, self.template_name, {'form':form,'Mascotas': mascotas})
+
+  # prestar atención ahora el method post recibe un parametro pk == primaryKey == identificador único
+  def post(self, request, pk): 
+      mascotas = get_object_or_404(Mascotas, pk=pk)
+      form = self.form_class(request.POST ,instance=mascotas)
+      if form.is_valid():
+          form.save()
+          msg_exito = f"se actualizó con éxito la mascota {form.cleaned_data.get('nombre')}"
+          form = self.form_class(initial=self.initial)
+          return render(request, self.template_name, {'form':form, 
+                                                      'Mascotas': mascotas,
+                                                      'msg_exito': msg_exito})
+      
+      return render(request, self.template_name, {"form": form})
+
+ class BorrarMascota(View):
+  template_name = 'ejemplo/mascotas.html'
+    
+  def get(self, request, pk): 
+      familiar = get_object_or_404(Mascotas, pk=pk)
+      familiar.delete()
+      familiar = Familiar.objects.all()
+      return render(request, self.template_name, {'lista_familiares': familiar})     
+
 
 
 #Vehiculos

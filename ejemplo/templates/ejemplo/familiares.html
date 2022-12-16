@@ -8,9 +8,13 @@
             <!-- Esto agrega un link al form de actulización-->
             <a href='/mi-familia/actualizar/{{ familiar.id }}'>Actualizar</a>
             <a href='/mi-familia/borrar/{{ familiar.id }}'>Borrar</a>
+            
         </li>
+       
     </ul>
+
 {% endfor %}
+<p><a href='/principal/'>Volver a Pagina principal</a></p>
 {%endblock %}
 
 {% block titulo%}
