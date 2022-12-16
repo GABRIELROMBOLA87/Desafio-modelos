@@ -1,0 +1,19 @@
+{% extends 'ejemplo/base3.html' %}
+{% block contenido %}
+    
+    <a href='/mi-vehiculo/altavehiculo'>Nuevo Vehiculo</a>
+    {% for Vehiculo in lista_vehiculos %}
+    <ul>
+        <li> Marca: {{Vehiculo.marca}}, Modelo: {{Vehiculo.modelo}}, Año: {{Vehiculo.año}}
+            <!-- Esto agrega un link al form de actulización-->
+            <a href='/mi-vehiculo/actualizar/{{ Vehiculo.id }}'>Actualizar</a>
+            <a href='/mi-vehiculo/borrar/{{ Vehiculo.id }}'>Borrar</a>
+        </li>
+    </ul>
+{% endfor %}
+<p><a href='/principal/'>Volver a Pagina principal</a></p>
+{%endblock %}
+
+{% block titulo%}
+Lista de todos los Vehiculos
+{% endblock %}

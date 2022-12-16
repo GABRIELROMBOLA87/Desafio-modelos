@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from ejemplo.views import (monstrar_familiares, principal, monstrar_mascotas,
+from ejemplo.views import (monstrar_familiares, principal, monstrar_mascotas, monstrar_vehiculos,
                            BuscarFamiliar, AltaFamiliar, ActualizarFamiliar, BorrarFamiliar, Altamascota,
-                           ActualizarMascotas, BorrarMascota)
+                           ActualizarMascotas, BorrarMascota, Actualizarvehiculo, BorrarVehiculo, Altavehiculo)
 
 
 
@@ -27,6 +27,7 @@ urlpatterns = [
     path('principal/', principal),
     path('mi-familia/', monstrar_familiares),
     path('mi-mascota/', monstrar_mascotas),
+    path('mi-vehiculo/', monstrar_vehiculos),
     path('mi-familia/buscar', BuscarFamiliar.as_view()),
     path('mi-familia/alta', AltaFamiliar.as_view()),
     path('mi-familia/actualizar/<int:pk>', ActualizarFamiliar.as_view()),
@@ -34,4 +35,7 @@ urlpatterns = [
     path('mi-mascota/altamascota', Altamascota.as_view()),
     path('mi-mascota/actualizar/<int:pk>', ActualizarMascotas.as_view()),
     path('mi-mascota/borrar/<int:pk>', BorrarMascota.as_view()),
+    path('mi-vehiculo/altavehiculo', Altavehiculo.as_view()),
+    path('mi-vehiculo/actualizar/<int:pk>', Actualizarvehiculo.as_view()),
+    path('mi-vehiculo/borrar/<int:pk>', BorrarVehiculo.as_view()),
     ]

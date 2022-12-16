@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from ejemplo.models import Familiar, Mascotas
-from ejemplo.forms import Buscar, FamiliarForm, MascotasForm
+from ejemplo.models import Familiar, Mascotas, Vehiculo
+from ejemplo.forms import Buscar, FamiliarForm, MascotasForm, VehiculosForm
 from django.views import View
 
 
@@ -161,6 +161,66 @@ class BorrarMascota(View):
 
 
 #Vehiculos
+
+def monstrar_vehiculos(request):
+  lista_vehiculos = Vehiculo.objects.all()
+  return render(request, "ejemplo/vehiculos.html", {"lista_vehiculos": lista_vehiculos})
+
+
+class Altavehiculo(View):
+
+    form_class = VehiculosForm
+    template_name = 'ejemplo/alta_vehiculo.html'
+    initial = {"marca":"", "modelo":"", "año":""}
+
+    def get(self, request):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form':form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            msg_exito = f"se cargo con éxito el vehiculo {form.cleaned_data.get('modelo')}"
+            form = self.form_class(initial=self.initial)
+            return render(request, self.template_name, {'form':form, 
+                                                        'msg_exito': msg_exito})
+        
+        return render(request, self.template_name, {"form": form})
+
+class Actualizarvehiculo(View):
+  form_class = VehiculosForm
+  template_name = 'ejemplo/actualizar_vehiculos.html'
+  initial = {"marca":"", "marca":"", "año":""}
+  
+ # prestar atención ahora el method get recibe un parametro pk == primaryKey == identificador único
+  def get(self, request, pk): 
+      vehiculos = get_object_or_404(Vehiculo, pk=pk)
+      form = self.form_class(instance=vehiculos)
+      return render(request, self.template_name, {'form':form,'Vehiculo': vehiculos})
+
+  # prestar atención ahora el method post recibe un parametro pk == primaryKey == identificador único
+  def post(self, request, pk): 
+      vehiculos = get_object_or_404(Vehiculo, pk=pk)
+      form = self.form_class(request.POST ,instance=vehiculos)
+      if form.is_valid():
+          form.save()
+          msg_exito = f"se actualizó con éxito el vehiculo {form.cleaned_data.get('modelo')}"
+          form = self.form_class(initial=self.initial)
+          return render(request, self.template_name, {'form':form, 
+                                                      'Vehiculo': vehiculos,
+                                                      'msg_exito': msg_exito})
+      
+      return render(request, self.template_name, {"form": form})
+
+class BorrarVehiculo(View):
+  template_name = 'ejemplo/vehiculos.html'
+    
+  def get(self, request, pk): 
+      vehiculos = get_object_or_404(Vehiculo, pk=pk)
+      vehiculos.delete()
+      vehiculos = Vehiculo.objects.all()
+      return render(request, self.template_name, {'lista_vehiculos': vehiculos})    
 
 
 

@@ -1,0 +1,13 @@
+{% extends 'ejemplo/base3.html' %}
+{% block titulo%} Modificar un Vehiculo {% endblock %}
+{% block contenido %}
+
+<form action="/mi-vehiculo/actualizar/{{ Vehiculo.id }}" method="post"> 
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Actualizar">
+</form>
+
+<h2 style="color:green">{{msg_exito}}</h2>
+<a href='/mi-vehiculo/'>Volver a Lista de Vehiculos</a>
+{% endblock %}
