@@ -1,6 +1,8 @@
 {% extends 'ejemplo/base.html' %}
 {% block contenido %}
+
     
+
     <a href='/mi-familia/alta'>Nuevo Familiar</a>
     {% for familiar in lista_familiares %}
     <ul>
@@ -17,6 +19,8 @@
 <p><a href='/principal/'>Volver a Pagina principal</a></p>
 {%endblock %}
 
-{% block titulo%}
+
+
+  {% block titulo%}
 Lista de todos mis Familiares
 {% endblock %}

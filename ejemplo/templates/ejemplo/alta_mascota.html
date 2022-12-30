@@ -5,7 +5,9 @@
   <form action="/mi-mascota/altamascota" method="post">
     {% csrf_token %}
     {{ form.as_p }}
+    
     <input type="submit" value="Guardar">
+    
   </form>
   
   <h2 style="color:green">{{msg_exito}}</h2>
